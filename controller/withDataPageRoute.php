@@ -9,29 +9,24 @@
     //3.삭제시킬 데이터: deleteData
     //4.조회할 데이터: searchData
     //5.그 외 데이터: 각자 기능을 알 수 있을만한 이름
+    header("Content-type: application/json");
 
     function requestValidation() {
-        if(!isset($_GET['pageURL'])) {
-            return false;
-        }
-        else if(empty($_GET['pageURL'])){
-            return false;
-        }
-        else{
-            return true;
-        }
+        var_dump($_REQUEST);
+        //return empty($loginJsonData) ? true : false;
     }
 
     try{
         if(requestValidation() === false){
             throw new exception("400");
         }
-        else if($_GET['pageURL'] === "~~~~~~"){ //연결 요청 적기
+        else if($_GET['pageURL'] === "LoginProcess"){ //연결 요청 적기
             //연결 요청에 따라 데이터 받고 보내기
+            echo json_decode($_GET['DATA'], true);
         }
-        else{
-            throw new exception("404");
-        }
+        // else{
+        //     throw new exception("404");
+        // }
     } catch(exception $e){
         if($e->getMessage() === "400"){
             header('Location: /view/errorPage/400BadRequest.html');
